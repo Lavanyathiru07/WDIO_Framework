@@ -1,0 +1,22 @@
+{
+  "name": "cucumber_project_folder_wdio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+   
+  "test": "wdio run ./wdio.conf.js",
+  "watch": "wdio run ./wdio.conf.js --watch --spec ./features/"
+
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@wdio/cli": "^9.15.0",
+    "@wdio/cucumber-framework": "^9.15.0",
+    "@wdio/local-runner": "^9.15.0",
+    "@wdio/spec-reporter": "^9.15.0"
+  }
+}
