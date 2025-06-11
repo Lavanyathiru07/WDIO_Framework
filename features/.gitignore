@@ -1,9 +1,0 @@
-# WDIO-specific
-allure-results/
-reports/
-screenshot/
- 
-# Node
-node_modules/
-.env
-*.log

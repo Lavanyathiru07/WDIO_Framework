@@ -110,6 +110,12 @@ exports.config = {
     // before running any tests.
     framework: 'cucumber',
     
+
+    afterTest: async function (test, context, { error, result, duration, passed, retries }) {
+  if (!passed) {
+    await browser.takeScreenshot();
+  }
+},
     //
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
@@ -132,13 +138,7 @@ reporters: [
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: true,
     }],
-    ['html-nice', {
-    outputDir: './html-report',
-    filename: 'report.html',
-    reportTitle: 'WDIO Test Report',
-    showInBrowser: true,
-    useOnAfterCommandForScreenshot: false
-  }]
+
 
 ],
 

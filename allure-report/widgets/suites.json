@@ -1,1 +1,1 @@
-{"total":2,"items":[{"uid":"bc3a15e8b0720444088836a268f69eac","name":"Testing the DemoQa application: Test the practice form section","statistic":{"failed":0,"broken":0,"skipped":0,"passed":12,"unknown":0,"total":12}}]}
+{"total":2,"items":[{"uid":"bc3a15e8b0720444088836a268f69eac","name":"Testing the DemoQa application: Test the practice form section","statistic":{"failed":0,"broken":1,"skipped":11,"passed":0,"unknown":0,"total":12}}]}
