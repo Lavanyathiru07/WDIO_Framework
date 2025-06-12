@@ -21,12 +21,12 @@ exports.config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './features/**/*.feature'
+        './features/*.feature'
     ],
     // Patterns to exclude.
-    exclude: [
-        // 'path/to/excluded/files'
-    ],
+    // exclude: [
+    //     // 'path/to/excluded/files'
+    // ],
     //
     // ============
     // Capabilities
@@ -49,9 +49,10 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    // capabilities: [{
-    //     browserName: 'chrome'
-    // }],
+    capabilities: [{
+    browserName: 'chrome'
+}],
+
 
     //
     // ===================
@@ -109,13 +110,13 @@ exports.config = {
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
     framework: 'cucumber',
-    
 
-    afterTest: async function (test, context, { error, result, duration, passed, retries }) {
-  if (!passed) {
-    await browser.takeScreenshot();
-  }
-},
+
+    //     afterTest: async function (test, context, { error, result, duration, passed, retries }) {
+    //   if (!passed) {
+    //     await browser.takeScreenshot();
+    //   }
+    // },
     //
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
@@ -129,26 +130,27 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    
-    
-reporters: [
-    'spec',
-    ['allure', {
-        outputDir: 'allure-results',
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true,
-    }],
 
 
-],
+    reporters: [
+        'spec',
+        ['allure', {
+            outputDir: 'allure-results',
+            disableWebdriverStepsReporting: true,
+            disableWebdriverScreenshotsReporting: true,
+        }]
+
+
+    ],
 
     // If you are using Cucumber you need to specify the location of your step definitions.
     cucumberOpts: {
         // <string[]> (file/dir) require files before executing features
-        require: ['./features/step-definitions/*.js'],
+        require: ['./step-definitions/*.js'],
+
         // <boolean> show full backtrace for errors
         backtrace: false,
-        compiler:['js:babel-core/register'],
+        compiler: ['js:babel-core/register'],
         // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
         requireModule: [],
         // <boolean> invoke formatters without executing steps
@@ -164,19 +166,19 @@ reporters: [
         // <boolean> fail if there are any undefined or pending steps
         strict: false,
         // <string> (expression) only execute the features or scenarios with tags matching the expression
-        
-        tagExpression: process.env.TAG
-  },
-  baseUrl: process.env.URL ,
-  capabilities: [{
-    browserName: process.env.BROWSER_NAME
-                }],
 
-        // <number> timeout for step definitions
-        timeout: 60000,
-        // <boolean> Enable this config to treat undefined definitions as warnings.
-        ignoreUndefinedDefinitions: false
-    
+        tags: process.env.TAG
+    },
+    baseUrl: process.env.URL,
+    capabilities: [{
+        browserName: process.env.BROWSER_NAME
+    }],
+
+    // <number> timeout for step definitions
+    timeout: 60000,
+    // <boolean> Enable this config to treat undefined definitions as warnings.
+    ignoreUndefinedDefinitions: false,
+
 
 
     //
@@ -299,7 +301,7 @@ reporters: [
      */
     // afterFeature: function (uri, feature) {
     // },
-    
+
     /**
      * Runs after a WebdriverIO command gets executed
      * @param {string} commandName hook command name
@@ -349,6 +351,11 @@ reporters: [
     */
     // beforeAssertion: function(params) {
     // }
+    afterStep: async function (step, scenario, { error, duration, passed }, context) {
+  if (error) {
+    await browser.takeScreenshot();
+  }
+}
     /**
     * Hook that gets executed after a WebdriverIO assertion happened.
     * @param {object} params information about the assertion that was executed, including its results

@@ -1,6 +1,8 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
-
 const DemoQaPom = require('../pageobjects/DemoQaPom');
+const Utility = require('../pageobjects/Utility');
+
+
 
 
 
@@ -114,7 +116,7 @@ When(/^I am on practice form page I select the state (.*) from the option$/, asy
 Then(/^I am on practice form page I select the city (.*) from the autoSuggestion option$/, async (city) => {
     try {
         browser.pause(5000)
-        await DemoQaPom.autoSelectSuggestionCity(city);
+        await Utility.autoSelectSuggestionCity(DemoQaPom.selectCity,DemoQaPom.selectCityOption,"Pani")
     }
     catch (error) {
         console.log(`failed------:${error}`)
@@ -124,7 +126,7 @@ Then(/^I am on practice form page I select the city (.*) from the autoSuggestion
 
 When(/^I am on Practice form page I Click the sumbit button$/,async () => {
 try{
-    await DemoQaPom.dateofBirth.click()
+    await DemoQaPom.submitButton.click()
 }
 catch(error)
 {
